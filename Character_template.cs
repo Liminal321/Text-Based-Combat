@@ -16,10 +16,15 @@ using System;
                 get {return health;}
                 set 
                 {
+                    if (value == 0)
+                {
+                    isAlive = false;         
+                }
                     if (value > maxHealth || value < 0 || !isAlive)
                     {
-                        throw new ArgumentException("Health is out of bounds (Either Player is dead,Value exceeds or Doesnt reach standards)", nameof(value));
-                    }
+                        throw new ArgumentException ("Health is out of bounds (Either Player is dead,Value exceeds or Doesnt reach standards)", nameof(value));
+                    } 
+                    
                     health = value;
                 }
             }
@@ -32,10 +37,8 @@ using System;
                     {
                         throw new ArgumentException("Name contains a number", nameof(value));
                     } 
-                    else {
                     name = value;
                     }
-                }
             }
 
             protected abstract string Attack(int damage, string attackName);
