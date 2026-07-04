@@ -2,7 +2,7 @@ using System;
 
     namespace World
     {
-        public abstract class CharacterBase
+        public class CharacterBase
         {
             private string name;
             private bool isAlive = true;
@@ -33,14 +33,18 @@ using System;
                 get {return name;}
                 set
                 {
-                    if (value != null && value.Any(char.IsDigit))
+                    if (value != null && value.Any(char.IsDigit) || value.Any(char.IsSymbol))
                     {
                         throw new ArgumentException("Name contains a number", nameof(value));
                     } 
                     name = value;
                     }
             }
-
-            protected abstract string Attack(int damage, string attackName);
+        public CharacterBase(string _name, int _health,bool _status)
+        {
+           name = _name;
+           health = _health;
+           isAlive = _status; 
+        }
         }
     }
