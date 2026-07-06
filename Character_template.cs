@@ -18,12 +18,12 @@ namespace abdulmoez
             {
                 try
                 {
-                    if (value == 0)
+                    if (value <= 0)
                     {
                         isAlive = false;
                     }
 
-                    if (value > maxHealth || value < 0 || !isAlive)
+                    if (value > maxHealth || !isAlive)
                     {
                         throw new ArgumentException("Health is out of bounds (Either Player is dead, value exceeds or doesn't reach standards)", nameof(value));
                     }
