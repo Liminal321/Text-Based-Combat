@@ -1,0 +1,89 @@
+using System;
+using System.Security.Cryptography.X509Certificates;
+using Microsoft.Win32.SafeHandles;
+namespace World
+{
+    public class Maining
+    {  
+      List<string> Subjects = new List<string>() {"1.Math", "2.Computing" ,"3.Urdu", "4.English"};
+
+    List<string> StudentsNIdPSub = new List<string>(){};
+        public string? Students;
+        public string? Roll;
+        public void getStudent()
+        {
+            Console.WriteLine("Enter Student Name");
+            Students = Console.ReadLine();
+            Console.WriteLine("enter student Id");
+            Roll = Console.ReadLine();
+            Console.WriteLine("Enter Subjects from The Following LIST");
+            foreach(string i in Subjects)
+            {
+                Console.WriteLine(i);
+            }
+            int? SWITCHY = 0;
+            SWITCHY = int.Parse(Console.ReadLine());
+            switch (SWITCHY)
+            {
+                case 1:
+                StudentsNIdPSub.AddRange(Students + " " + Roll + " MATH");
+                break;
+                case 2:
+                StudentsNIdPSub.AddRange(Students + " " + Roll + " Computing");
+                break;
+                case 3:
+                StudentsNIdPSub.AddRange(Students + " " + Roll + "Urdu");
+                break;
+                case 4:
+                StudentsNIdPSub.Add(Students + " " + Roll + "English");
+                break;
+            }
+        }
+        public void searchStudent()
+        {
+            string? GetStudent;
+            string? GetRoll;
+            string? resultString;
+            string? resultRoll;
+            Console.WriteLine("Enter Student name or/and roll call");
+            GetStudent = Console.ReadLine();
+            GetRoll = Console.ReadLine();
+            resultString = StudentsNIdPSub.Find(x => x.Contains(GetStudent, StringComparison.OrdinalIgnoreCase));
+            resultRoll = StudentsNIdPSub.Find(y => y.Contains(GetRoll, StringComparison.OrdinalIgnoreCase));
+            if (resultString != null)
+            {
+                Console.WriteLine(resultString);
+            }
+            else
+            {
+                Console.WriteLine("Not found");
+            }
+            if(resultRoll != null)
+            {
+                Console.WriteLine(resultRoll);
+            } else
+            {
+                Console.WriteLine("Not found");
+            }
+
+        }
+        public static void Main(string[] args)
+        {
+            Maining m = new Maining();
+            string? Switchy;
+            while (true){
+            Console.WriteLine("Would you like to \n 1.Add 2.Search");
+            Switchy = Console.ReadLine();
+            switch (Switchy)
+            {
+                case "Add":
+                m.getStudent();
+                break;
+                case "Search":
+                m.searchStudent();
+                break;
+            }
+        }
+        }
+    }
+}
